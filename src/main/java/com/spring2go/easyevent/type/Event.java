@@ -1,6 +1,5 @@
 package com.spring2go.easyevent.type;
 
-import lombok.Data;
 /**
  * @author: Christy Guo
  * @create_date: 2023-05-02 11:12 PM
@@ -8,6 +7,10 @@ import lombok.Data;
  * @modifier:
  */
 
+
+import com.spring2go.easyevent.entity.EventEntity;
+import com.spring2go.easyevent.util.DateUtil;
+import lombok.Data;
 
 @Data
 public class Event {
@@ -19,4 +22,14 @@ public class Event {
   private Integer creatorId;
   private User creator;
 
+  public static Event fromEntity(EventEntity eventEntity) {
+    Event event = new Event();
+    event.setId(eventEntity.getId().toString());
+    event.setTitle(eventEntity.getTitle());
+    event.setDescription(eventEntity.getDescription());
+    event.setPrice(eventEntity.getPrice());
+    event.setDate(DateUtil.formatDateInISOString(eventEntity.getDate()));
+    event.setCreatorId(eventEntity.getCreatorId());
+    return event;
+  }
 }
