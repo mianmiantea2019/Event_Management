@@ -16,7 +16,7 @@ public class AuthContext {
     private boolean tokenInvalid;
 
     public void ensureAuthenticated() {
-        if (tokenInvalid) throw new RuntimeException("令牌无效！");
-        if (userEntity == null) throw new RuntimeException("未登陆，请先登陆！");
+        if (tokenInvalid) throw new RuntimeException("invalid token！");
+        if (userEntity == null) throw new RuntimeException("please login！");
     }
 }
