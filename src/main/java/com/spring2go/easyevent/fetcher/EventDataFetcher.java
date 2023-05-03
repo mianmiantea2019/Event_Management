@@ -13,7 +13,6 @@ import com.netflix.graphql.dgs.*;
 import com.netflix.graphql.dgs.context.DgsContext;
 import com.spring2go.easyevent.custom.AuthContext;
 import com.spring2go.easyevent.entity.EventEntity;
-import com.spring2go.easyevent.entity.UserEntity;
 import com.spring2go.easyevent.fetcher.dataloader.CreatorsDataLoader;
 import com.spring2go.easyevent.mapper.EventEntityMapper;
 import com.spring2go.easyevent.mapper.UserEntityMapper;
@@ -35,7 +34,7 @@ import java.util.stream.Collectors;
 public class EventDataFetcher {
 
   private final EventEntityMapper eventEntityMapper;
-  private final UserEntityMapper userEntityMapper;
+  private final EventEntityMapper.UserEntityMapper userEntityMapper;
 
   @DgsQuery
   public List<Event> events() {
