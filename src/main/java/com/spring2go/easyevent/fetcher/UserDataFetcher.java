@@ -64,26 +64,26 @@ public class UserDataFetcher {
         return newUser;
     }
 
-    @DgsQuery
-    public AuthData login(@InputArgument LoginInput loginInput) {
-        UserEntity userEntity = this.findUserByEmail(loginInput.getEmail());
-        if (userEntity == null) {
-            throw new RuntimeException("User doesn't exist！");
-        }
-        boolean match = passwordEncoder.matches(loginInput.getPassword(), userEntity.getPassword());
-        if (!match) {
-            throw new RuntimeException("Incorrect password！");
-        }
-
-        String token = TokenUtil.signToken(userEntity.getId(), 1);
-
-        AuthData authData = new AuthData()
-                .setUserId(userEntity.getId())
-                .setToken(token)
-                .setTokenExpiration(1);
-
-        return authData;
-    }
+//    @DgsQuery
+//    public AuthData login(@InputArgument LoginInput loginInput) {
+//        UserEntity userEntity = this.findUserByEmail(loginInput.getEmail());
+//        if (userEntity == null) {
+//            throw new RuntimeException("User doesn't exist！");
+//        }
+//        boolean match = passwordEncoder.matches(loginInput.getPassword(), userEntity.getPassword());
+//        if (!match) {
+//            throw new RuntimeException("Incorrect password！");
+//        }
+//
+//        String token = TokenUtil.signToken(userEntity.getId(), 1);
+//
+//        AuthData authData = new AuthData()
+//                .setUserId(userEntity.getId())
+//                .setToken(token)
+//                .setTokenExpiration(1);
+//
+//        return authData;
+//    }
 
 
     @DgsData(parentType = "User", field = "bookings")
