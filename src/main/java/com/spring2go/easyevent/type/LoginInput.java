@@ -1,3 +1,10 @@
+/*
+ * @Author: mianmiantea2019
+ * @Date: 2023-05-05 00:24:44
+ * @LastEditors: mianmiantea2019
+ * @LastEditTime: 2023-05-05 00:26:35
+ * @Description: 
+ */
 package com.spring2go.easyevent.type;
 
 /**
