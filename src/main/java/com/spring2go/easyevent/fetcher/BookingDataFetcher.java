@@ -78,4 +78,40 @@ public class BookingDataFetcher {
         return event;
     }
 
+    @DgsMutation
+    public Booking bookEvent(@InputArgument String eventId, DataFetchingEnvironment dfe) {
+        AuthContext authContext = DgsContext.getCustomContext(dfe);
+        authContext.ensureAuthenticated();
+
+        UserEntity userEntity = authContext.getUserEntity();
+
+        BookingEntity bookingEntity = new BookingEntity();
+        bookingEntity.setUserId(userEntity.getId());
+        bookingEntity.setEventId(Integer.parseInt(eventId));
+        bookingEntity.setCreatedAt(new Date());
+        bookingEntity.setUpdatedAt(new Date());
+
+        bookingEntityMapper.insert(bookingEntity);
+
+        Booking booking = Booking.fromEntity(bookingEntity);
+
+        return booking;
+    }
+
+    @DgsData(parentType = "Booking", field = "user")
+    public User user(DgsDataFetchingEnvironment dfe) {
+        Booking booking = dfe.getSource();
+        UserEntity userEntity = userEntityMapper.selectById(booking.getUserId());
+        User user = User.fromEntity(userEntity);
+        return user;
+    }
+
+
+    @DgsData(parentType = "Booking", field = "event")
+    public Event event(DgsDataFetchingEnvironment dfe) {
+        Booking booking = dfe.getSource();
+        EventEntity eventEntity = eventEntityMapper.selectById(booking.getEventId());
+        Event event = Event.fromEntity(eventEntity);
+        return event;
+    }
 }
