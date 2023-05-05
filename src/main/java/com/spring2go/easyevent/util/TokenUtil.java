@@ -17,11 +17,14 @@ import java.util.Date;
 public class TokenUtil {
 
   static long MILLI_SECONDS_IN_HOUR = 1 * 60 * 60 * 1000;
-  static String ISSUER = "boboweike";
+  static String ISSUER = dotenv.get("ISSUER");
   static String USER_ID = "userId";
-  static Algorithm algorithm = Algorithm.HMAC256("mysecretkey");
+  static String KEY = dotenv.get("KEY");
+  static Algorithm algorithm = Algorithm.HMAC256(KEY);
 
   public static String signToken(Integer userId, int expirationInHour) {
+    Dotenv dotenv = Dotenv.configure().load();
+
     String token = JWT.create()
             .withIssuer(ISSUER)
             .withClaim("userId", userId)
